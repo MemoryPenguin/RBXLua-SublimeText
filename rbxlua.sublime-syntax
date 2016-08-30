@@ -68,6 +68,9 @@ contexts:
     - match: '\btable\.(foreach|foreachi|getn|maxn|setn)\b'
       scope: invalid.deprecated.rbxlua
 
+    # Function calls
+    - match: '\b({{identifier}})(?=\s*[\("''\{])\b'
+      scope: variable.function.rbxlua
 
     # Logical word operators
     - match: '\b(and|or|not)\b'
@@ -117,4 +120,16 @@ contexts:
   block_comment:
     - meta_scope: comment.block.rbxlua
     - match: '\]\]'
+      pop: true
+
+  function_declaration:
+    - meta_scope: meta.function
+    - match: '\('
+      push: 
+        - meta_scope: meta.function.parameters
+        - match: '\b{{identifier}}\b'
+          scope: variable.function.parameter
+        - match: ',\s*\)'
+          scope: invalid.illegal
+    - match: '\)'
       pop: true
