@@ -42,27 +42,27 @@ contexts:
       scope: constant.numeric.scientific.rbxlua
 
     # Language constants
-    - match: '\btrue|false|nil\b'
+    - match: '\b(true|false|nil)\b'
       scope: constant.language.rbxlua
 
     # Control keywords
-    - match: '\bbreak|do|end|for|in|or|repeat|return|while|local\b'
+    - match: '\b(break|do|end|for|in|or|repeat|return|while|local)\b'
       scope: keyword.control.rbxlua
 
     # Conditional keywords
-    - match: '\bif|then|else|elseif|until\b'
+    - match: '\b(if|then|else|elseif|until)\b'
       scope: keyword.control.conditional.rbxlua
 
     # Builtins
-    - match: '\bgame|workspace|script|plugin|_VERSION|_G|math\.(huge|pi)|self\b'
+    - match: '\b(game|workspace|script|plugin|_VERSION|_G|math\.(huge|pi)|self)\b'
       scope: variable.language.rbxlua
 
     # Builtin functions
-    - match: '\bprint|warn|error|assert|collectgarbage|dofile|gcinfo|getfenv|getmetatable|ipairs|load|loadfile|loadstring|newproxy|next|pairs|pcall|rawequal|rawget|rawset|select|setfenv|setmetatable|tonumber|type|unpack|xpcall|[dD]elay|ElapsedTime|LoadLibrary|require|[sS]pawn|tick|time|UserSettings|Version|wait|ypcall|DebuggerManager|PluginManager|settings|stats|\bmath\.(?:abs|acos|asin|atan2?|ceil|cos|cosh|deg|exp|floor|fmod|frexp|ldexp|log|log10|max|min|modf|noise|pow|rad|random|randomseed|sin|sinh|sqrt|tan|tanh)|coroutine\.(?:create|resume|running|status|wrap|yield)|string\.(?:byte|char|dump|find|format|len|lower|match|rep|reverse|sub|upper|gmatch|gsub)|table\.(?:concat|insert|remove|sort)\b'
+    - match: '\b(print|warn|error|assert|collectgarbage|dofile|gcinfo|getfenv|getmetatable|ipairs|load|loadfile|loadstring|newproxy|next|pairs|pcall|rawequal|rawget|rawset|select|setfenv|setmetatable|tonumber|type|unpack|xpcall|[dD]elay|ElapsedTime|LoadLibrary|require|[sS]pawn|tick|time|UserSettings|Version|wait|ypcall|DebuggerManager|PluginManager|settings|stats|\bmath\.(?:abs|acos|asin|atan2?|ceil|cos|cosh|deg|exp|floor|fmod|frexp|ldexp|log|log10|max|min|modf|noise|pow|rad|random|randomseed|sin|sinh|sqrt|tan|tanh)|coroutine\.(?:create|resume|running|status|wrap|yield)|string\.(?:byte|char|dump|find|format|len|lower|match|rep|reverse|sub|upper|gmatch|gsub)|table\.(?:concat|insert|remove|sort))\b'
       scope: variable.function.builtin.rbxlua
 
     # Deprecated table functions
-    - match: '\btable\.(foreach|foreachi|getn|maxn|setn)\b'
+    - match: '\b(table\.(foreach|foreachi|getn|maxn|setn))\b'
       scope: invalid.deprecated.rbxlua
 
     # Function calls
@@ -70,15 +70,15 @@ contexts:
       scope: variable.function.rbxlua
 
     # Logical word operators
-    - match: '\band|or|not\b'
+    - match: '\b(and|or|not)\b'
       scope: keyword.operator.word.rbxlua
 
     # Logical operators
-    - match: '\b(<|>)=?|~=|==\b'
+    - match: '\b((<|>)=?|~=|==)\b'
       scope: keyword.operator.logical.rbxlua
 
     # Arithmetic operators
-    - match: '\b\+|-|\*|%|\^\b'
+    - match: '\b(\+|-|\*|%|\^)\b'
       scope: keyword.operator.arithmetic.rbxlua
 
     # Assignment operator
@@ -139,6 +139,7 @@ contexts:
           scope: variable.function.parameter.rbxlua
         - match: ',\s*\)'
           scope: invalid.illegal.rbxlua
+          pop: true
         - match: '\)'
           scope: keyword.operator.rbxlua
           pop: true
