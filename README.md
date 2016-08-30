@@ -15,7 +15,7 @@ Once installed, simply select the language using `Ctrl-Shift-P` and searching fo
 ```
 
 ## Images
-*Images were captured using [Boxy Ocean](https://packagecontrol.io/packages/Boxy%20Theme)*
+*Images were captured using the [Boxy Ocean](https://packagecontrol.io/packages/Boxy%20Theme) theme and syntax highlighting.*
 ![Demo 1](images/demo-1.gif)
 
 ![Demo 2](images/demo-2.png)
