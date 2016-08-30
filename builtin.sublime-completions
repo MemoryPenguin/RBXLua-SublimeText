@@ -5,5 +5,7 @@
 		"script",
 		"plugin",
 		"game",
+		"_VERSION",
+		"_G"
 	]
 }

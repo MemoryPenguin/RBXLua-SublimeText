@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+for ${1:i}, ${2:v} in pairs($3) do
+	$4
+end
+]]></content>
+	<tabTrigger>pairs</tabTrigger>
+	<scope>source.rbxlua</scope>
+	<description>A pairs loop</description>
+</snippet>
