@@ -47,7 +47,7 @@ contexts:
       scope: constant.language.rbxlua
 
     # Control keywords
-    - match: '\b(break|do|end|for|in|or|repeat|return|while|local)\b'
+    - match: '\b(break|do|end|for|in|or|repeat|return|while)\b'
       scope: keyword.control.rbxlua
 
     # Conditional keywords
@@ -90,9 +90,13 @@ contexts:
     - match: '\(|\)|\{|\}|\[|\]|;|:|,|\.{1,3}'
       scope: keyword.operator.rbxlua
 
+    # Local storage modifier
+    - match: '\blocal\b'
+      scope: storage.modifier.rbxlua
+
     # Function declarations
     - match: '\bfunction\b'
-      scope: keyword.operator.rbxlua
+      scope: storage.function.rbxlua
       push: function_declaration
 
   double_quoted_string:
