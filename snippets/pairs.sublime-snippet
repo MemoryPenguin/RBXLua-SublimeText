@@ -6,5 +6,5 @@ end
 ]]></content>
 	<tabTrigger>pairs</tabTrigger>
 	<scope>source.rbxlua</scope>
-	<description>A pairs loop</description>
+	<description>for i, v in pairs()</description>
 </snippet>

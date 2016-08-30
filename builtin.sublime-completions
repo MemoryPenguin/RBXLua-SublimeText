@@ -6,6 +6,9 @@
 		"plugin",
 		"game",
 		"_VERSION",
-		"_G"
+		"_G",
+		{ "trigger": "delay", "content": "delay($1, $2)" },
+		{ "trigger": "wait", "content": "wait($1)" },
+		{ "trigger": "spawn", "content": "spawn($1)" }
 	]
 }

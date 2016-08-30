@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+for ${1:i}, ${2:v} in ipairs($3) do
+	$4
+end
+]]></content>
+	<tabTrigger>ipairs</tabTrigger>
+	<scope>source.rbxlua</scope>
+	<description>for i, v in ipairs()</description>
+</snippet>

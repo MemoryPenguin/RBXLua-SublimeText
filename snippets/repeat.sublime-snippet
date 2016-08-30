@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+repeat
+	$1
+until $2
+]]></content>
+	<tabTrigger>repeat</tabTrigger>
+	<scope>source.rbxlua</scope>
+	<description>repeat until false</description>
+</snippet>

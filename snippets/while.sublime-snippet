@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+while $1 do
+	$2
+end
+]]></content>
+	<tabTrigger>while</tabTrigger>
+	<scope>source.rbxlua</scope>
+	<description>while true do</description>
+</snippet>
