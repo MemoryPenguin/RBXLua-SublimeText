@@ -16,6 +16,6 @@ Once installed, simply select the language using `Ctrl-Shift-P` and searching fo
 
 ## Images
 *Images were captured using [Boxy Ocean](https://packagecontrol.io/packages/Boxy%20Theme)*
-![Demo 1](images/demo1.gif)
+![Demo 1](images/demo-1.gif)
 
-![Demo 2](images/demo2.png)
+![Demo 2](images/demo-2.png)
