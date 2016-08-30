@@ -19,3 +19,6 @@ plugin
 
 game
 -- <- variable.langauge.rbxlua
+
+test(a, b)
+-- <- meta.function-call.rbxlua

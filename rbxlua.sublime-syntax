@@ -9,6 +9,7 @@ scope: source.rbxlua
 
 variables:
   string_escape_characters: '\b%(a|A|c|C|d|D|l|L|p|P|s|S|u|U|w|W|x|X|z|Z)'
+  identifier: '[A-Za-z]\w*'
 
 contexts:
   main:
@@ -34,7 +35,7 @@ contexts:
       scope: keyword.control.rbxlua
 
     # Numbers
-    - match: '\b(-)?[0-9.]+\b'
+    - match: '\b(-)?\d*\.\d+\b'
       scope: constant.numeric.rbxlua
 
     - match: '\b-?0x[\da-fA-F]+\b'
@@ -55,9 +56,18 @@ contexts:
     - match: '\b(if|then|else|elseif|until)\b'
       scope: keyword.control.conditional.rbxlua
 
-    # Other keywords
-    - match: '\b(local|function)\b'
-      scope: keyword.control.other.rbxlua
+    # Builtins
+    - match: '\b(game|workspace|script|plugin|_VERSION|_G|math\.(huge|pi)|self)\b'
+      scope: variable.language.rbxlua
+
+    # Builtin functions
+    - match: '\bprint|warn|error|assert|collectgarbage|dofile|gcinfo|getfenv|getmetatable|ipairs|load|loadfile|loadstring|newproxy|next|pairs|pcall|rawequal|rawget|rawset|select|setfenv|setmetatable|tonumber|type|unpack|xpcall|[dD]elay|ElapsedTime|LoadLibrary|require|[sS]pawn|tick|time|UserSettings|Version|wait|ypcall|DebuggerManager|PluginManager|settings|stats|\bmath\.(?:abs|acos|asin|atan|atan2|ceil|cos|cosh|deg|exp|floor|fmod|frexp|ldexp|log|log10|max|min|modf|noise|pow|rad|random|randomseed|sin|sinh|sqrt|tan|tanh)|coroutine\.(?:create|resume|running|status|wrap|yield)|string\.(?:byte|char|dump|find|format|len|lower|match|rep|reverse|sub|upper|gmatch|gsub)|table\.(?:concat|insert|remove|sort)\b'
+      scope: variable.function.builtin.rbxlua
+
+    # Deprecated table functions
+    - match: '\btable\.(foreach|foreachi|getn|maxn|setn)\b'
+      scope: invalid.deprecated.rbxlua
+
 
     # Logical word operators
     - match: '\b(and|or|not)\b'
@@ -78,34 +88,6 @@ contexts:
     # Miscellaneous operators
     - match: '(\(|\)|\{|\}|\[|\]|;|:|,|\.{1,3})'
       scope: keyword.operator.rbxlua
-
-    # Builtins
-    - match: '\b(game|workspace|script|plugin|_VERSION|_G|math\.(huge|pi)|self)\b'
-      scope: variable.language.rbxlua
-
-    # Global functions
-    - match: '\bprint|warn|error|assert|collectgarbage|dofile|gcinfo|getfenv|getmetatable|ipairs|load|loadfile|loadstring|newproxy|next|pairs|pcall|rawequal|rawget|rawset|select|setfenv|setmetatable|tonumber|type|unpack|xpcall|[dD]elay|ElapsedTime|LoadLibrary|require|[sS]pawn|tick|time|UserSettings|Version|wait|ypcall|DebuggerManager|PluginManager|settings|stats\b'
-      scope: variable.function.builtin.rbxlua
-    
-    # Math functions
-    - match: '\bmath\.(abs|acos|asin|atan|atan2|ceil|cos|cosh|deg|exp|floor|fmod|frexp|ldexp|log|log10|max|min|modf|noise|pow|rad|random|randomseed|sin|sinh|sqrt|tan|tanh)\b'
-      scope: variable.function.builtin.rbxlua
-
-    # Coroutines
-    - match: '\bcoroutine\.(create|resume|running|status|wrap|yield)\b'
-      scope: variable.function.builtin.rbxlua
-
-    # Strings
-    - match: '\bstring\.(byte|char|dump|find|format|len|lower|match|rep|reverse|sub|upper|gmatch|gsub)\b'
-      scope: variable.function.builtin.rbxlua
-
-    # Tables
-    - match: '\btable\.(concat|insert|remove|sort)\b'
-      scope: variable.function.builtin.rbxlua
-
-    # Deprecated table functions
-    - match: '\btable\.(foreach|foreachi|getn|maxn|setn)\b'
-      scope: invalid.deprecated.rbxlua
 
   double_quoted_string:
     - meta_scope: string.quoted.double.rbxlua
