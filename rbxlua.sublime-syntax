@@ -96,7 +96,7 @@ contexts:
 
     # Function declarations
     - match: '\bfunction\b'
-      scope: storage.function.rbxlua
+      scope: storage.type.function.rbxlua
       push: function_declaration
 
   double_quoted_string:
