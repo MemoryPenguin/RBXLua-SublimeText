@@ -10,6 +10,7 @@ scope: source.rbxlua
 variables:
   string_escape_characters: '\b%(a|A|c|C|d|D|l|L|p|P|s|S|u|U|w|W|x|X|z|Z)'
   identifier: '[A-Za-z]\w*'
+  number: '(-)?\d*\.?\d+'
 
 contexts:
   main:
@@ -32,13 +33,13 @@ contexts:
       push: line_comment
 
     # Numbers
-    - match: '\b(-)?\d*\.?\d+\b'
+    - match: '\b{{number}}\b'
       scope: constant.numeric.rbxlua
 
     - match: '\b-?0x[\da-fA-F]+\b'
       scope: constant.numeric.hex.rbxlua
 
-    - match: '\b[-\d\.]+[eE][-\d\.]+\b'
+    - match: '\b{{number}}[eE]{{number}}\b'
       scope: constant.numeric.scientific.rbxlua
 
     # Language constants
