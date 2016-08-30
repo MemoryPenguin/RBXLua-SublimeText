@@ -32,7 +32,7 @@ contexts:
       push: line_comment
 
     # Numbers
-    - match: '\b(-)?\d*\.\d+\b'
+    - match: '\b(-)?\d*\.?\d+\b'
       scope: constant.numeric.rbxlua
 
     - match: '\b-?0x[\da-fA-F]+\b'
