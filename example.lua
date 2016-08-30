@@ -34,6 +34,9 @@ local function GenerateTerrain()
 	end
 end
 
+local function Test(x,)
+end
+
 print(math.atan2(1))
 
 warn("Testing~ %s")

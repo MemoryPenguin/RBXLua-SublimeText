@@ -13,8 +13,7 @@ variables:
 
 contexts:
   main:
-    # Strings begin and end with quotes, and use backslashes as an escape
-    # character
+    # Strings
     - match: '"'
       scope: punctuation.definition.string.begin.rbxlua
       push: double_quoted_string
@@ -23,6 +22,7 @@ contexts:
       scope: punctuation.definition.string.begin.rbxlua
       push: single_quoted_string
 
+    # Comments
     - match: '--\[\['
       scope: punctuation.definition.comment.rbxlua
       push: block_comment
@@ -30,9 +30,6 @@ contexts:
     - match: '--'
       scope: punctuation.definition.comment.rbxlua
       push: line_comment
-
-    - match: '\b(if|else|for|while)\b'
-      scope: keyword.control.rbxlua
 
     # Numbers
     - match: '\b(-)?\d*\.\d+\b'
@@ -49,19 +46,19 @@ contexts:
       scope: constant.language.rbxlua
 
     # Control keywords
-    - match: '\b(break|do|end|for|in|or|repeat|return|while)\b'
+    - match: '\bbreak|do|end|for|in|or|repeat|return|while|local\b'
       scope: keyword.control.rbxlua
 
     # Conditional keywords
-    - match: '\b(if|then|else|elseif|until)\b'
+    - match: '\bif|then|else|elseif|until\b'
       scope: keyword.control.conditional.rbxlua
 
     # Builtins
-    - match: '\b(game|workspace|script|plugin|_VERSION|_G|math\.(huge|pi)|self)\b'
+    - match: '\bgame|workspace|script|plugin|_VERSION|_G|math\.(huge|pi)|self\b'
       scope: variable.language.rbxlua
 
     # Builtin functions
-    - match: '\bprint|warn|error|assert|collectgarbage|dofile|gcinfo|getfenv|getmetatable|ipairs|load|loadfile|loadstring|newproxy|next|pairs|pcall|rawequal|rawget|rawset|select|setfenv|setmetatable|tonumber|type|unpack|xpcall|[dD]elay|ElapsedTime|LoadLibrary|require|[sS]pawn|tick|time|UserSettings|Version|wait|ypcall|DebuggerManager|PluginManager|settings|stats|\bmath\.(?:abs|acos|asin|atan|atan2|ceil|cos|cosh|deg|exp|floor|fmod|frexp|ldexp|log|log10|max|min|modf|noise|pow|rad|random|randomseed|sin|sinh|sqrt|tan|tanh)|coroutine\.(?:create|resume|running|status|wrap|yield)|string\.(?:byte|char|dump|find|format|len|lower|match|rep|reverse|sub|upper|gmatch|gsub)|table\.(?:concat|insert|remove|sort)\b'
+    - match: '\bprint|warn|error|assert|collectgarbage|dofile|gcinfo|getfenv|getmetatable|ipairs|load|loadfile|loadstring|newproxy|next|pairs|pcall|rawequal|rawget|rawset|select|setfenv|setmetatable|tonumber|type|unpack|xpcall|[dD]elay|ElapsedTime|LoadLibrary|require|[sS]pawn|tick|time|UserSettings|Version|wait|ypcall|DebuggerManager|PluginManager|settings|stats|\bmath\.(?:abs|acos|asin|atan2?|ceil|cos|cosh|deg|exp|floor|fmod|frexp|ldexp|log|log10|max|min|modf|noise|pow|rad|random|randomseed|sin|sinh|sqrt|tan|tanh)|coroutine\.(?:create|resume|running|status|wrap|yield)|string\.(?:byte|char|dump|find|format|len|lower|match|rep|reverse|sub|upper|gmatch|gsub)|table\.(?:concat|insert|remove|sort)\b'
       scope: variable.function.builtin.rbxlua
 
     # Deprecated table functions
@@ -73,15 +70,15 @@ contexts:
       scope: variable.function.rbxlua
 
     # Logical word operators
-    - match: '\b(and|or|not)\b'
+    - match: '\band|or|not\b'
       scope: keyword.operator.word.rbxlua
 
     # Logical operators
-    - match: '\b((<|>)=?|~=|==)\b'
+    - match: '\b(<|>)=?|~=|==\b'
       scope: keyword.operator.logical.rbxlua
 
     # Arithmetic operators
-    - match: '\b(\+|-|\*|%|\^)\b'
+    - match: '\b\+|-|\*|%|\^\b'
       scope: keyword.operator.arithmetic.rbxlua
 
     # Assignment operator
@@ -89,8 +86,13 @@ contexts:
       scope: keyword.operator.assignment.rbxlua
 
     # Miscellaneous operators
-    - match: '(\(|\)|\{|\}|\[|\]|;|:|,|\.{1,3})'
+    - match: '\(|\)|\{|\}|\[|\]|;|:|,|\.{1,3}'
       scope: keyword.operator.rbxlua
+
+    # Function declarations
+    - match: '\bfunction\b'
+      scope: keyword.operator.rbxlua
+      push: function_declaration
 
   double_quoted_string:
     - meta_scope: string.quoted.double.rbxlua
@@ -123,13 +125,20 @@ contexts:
       pop: true
 
   function_declaration:
-    - meta_scope: meta.function
+    - meta_scope: meta.function.rbxlua
+    - match: '((?:{{identifier}}([\.:]))?)({{identifier}})'
+      captures:
+        1: entity.name.namespace.rbxlua
+        2: keyword.operator.rbxlua
+        3: entity.name.function.rbxlua
     - match: '\('
-      push: 
-        - meta_scope: meta.function.parameters
-        - match: '\b{{identifier}}\b'
-          scope: variable.function.parameter
+      scope: keyword.operator.rbxlua
+      set:
+        - meta_scope: meta.function.parameters.rbxlua
+        - match: '{{identifier}}'
+          scope: variable.function.parameter.rbxlua
         - match: ',\s*\)'
-          scope: invalid.illegal
-    - match: '\)'
-      pop: true
+          scope: invalid.illegal.rbxlua
+        - match: '\)'
+          scope: keyword.operator.rbxlua
+          pop: true
