@@ -1,8 +1,5 @@
-"""
-Parses the API dump on demand.
-"""
-
-import urllib2, re
+import re
+from urllib.request import urlopen
 
 API_URL = r"http://anaminus.github.io/rbx/raw/api/latest.txt"
 API_REGEX = re.compile(r"^\s*(\w+) (\w+)[ \.]?(\w*)[ \.:]*(\w*)(.*)")
@@ -13,6 +10,7 @@ def parse_dump_line(line):
 	"""
 	Parses a line from the API dump.
 	"""
+	match = API_REGEX.match(line)
 	line_type = match.group(1)
 	remainder = match.group(5)
 	tags = TAG_REGEX.findall(remainder)
@@ -41,10 +39,10 @@ def parse_api_dump():
 	"""
 	Fetches and parses the API dump from the server.
 	"""
-	raw_data = urllib2.open(API_URL)
+	raw_data = urlopen(API_URL)
 	entries = []
 
 	for line in raw_data:
-		entries.append(parse_dump_line(line))
+		entries.append(parse_dump_line(line.decode()))
 
 	return entries
