@@ -4,7 +4,7 @@
 	<key>name</key>
 	<string>Indent</string>
 	<key>scope</key>
-	<string>source.lua</string>
+	<string>source.rbxlua</string>
 	<key>settings</key>
 	<dict>
 		<key>decreaseIndentPattern</key>
