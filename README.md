@@ -30,6 +30,9 @@ Currently this plugin is not on Package Control; keep an eye on [this PR](https:
 
 ## Images
 *Images were captured using the [Boxy Ocean](https://packagecontrol.io/packages/Boxy%20Theme) theme and syntax highlighting.*
+
 ![Demo 1](images/demo-1.gif)
 
 ![Demo 2](images/demo-2.png)
+
+![Demo 3](images/demo-3.gif)
