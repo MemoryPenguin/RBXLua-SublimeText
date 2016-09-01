@@ -4,7 +4,7 @@ from ROBLOXLua.extra_tags import apply_extra_tags
 
 API_URL = r"http://anaminus.github.io/rbx/raw/api/latest.txt"
 API_REGEX = re.compile(r"^\s*(\w+) (\w+)[ \.]?(\w*)[ \.:]*(\w*)(.*)")
-TAG_REGEX = re.compile(r"\[(\w)+\]")
+TAG_REGEX = re.compile(r"\[(\w+)\]")
 API_TAG_FILTERS = [ "hidden", "deprecated", "RobloxScriptSecurity", "RobloxScriptSecurity" ]
 
 def parse_dump_line(line):
