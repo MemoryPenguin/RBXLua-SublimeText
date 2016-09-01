@@ -4,9 +4,10 @@ from ROBLOXLua.apiparser import parse_api_dump
 
 completion_items = parse_api_dump()
 
-FUNCTION_CALL_REGEX = re.compile(r"\b([\w\.]+)\s*\(?[\"\'](\w*)")
+FUNCTION_CALL_REGEX = re.compile(r"\b([\w\.]+)\s*\(?[\"\']")
 
-class_detections = [ "GetService", "FindService", "IsA", "Instance.new" ]
+service_detections = [ "GetService", "FindService", "getService", "service" ]
+services = set([ e["entry_completion"] for e in completion_items if e["entry_type"] == "Class" and "service" in e["entry_tags"] ])
 
 class AutoCompleteProvider(sublime_plugin.EventListener):
 	"""
@@ -22,10 +23,11 @@ class AutoCompleteProvider(sublime_plugin.EventListener):
 			line = view.substr(view.line(location))
 			function_match = FUNCTION_CALL_REGEX.search(line)
 
-			if function_match is not None and function_match.group(1) in class_detections:
-				class_matches = [ e["entry_completion"] for e in completion_items if e["entry_type"] == "Class" ]
-				for class_match in class_matches:
-					selected_completions.add(class_match)
+			if function_match is not None:
+				function_name = function_match.group(1)
+
+				if function_name in service_detections:
+					selected_completions.update(services)
 
 		if len(selected_completions) > 0:
-			return ([ [e, e] for e in selected_completions ], sublime.INHIBIT_EXPLICIT_COMPLETIONS | sublime.INHIBIT_WORD_COMPLETIONS)
+			return ([ [e] for e in selected_completions ], sublime.INHIBIT_EXPLICIT_COMPLETIONS | sublime.INHIBIT_WORD_COMPLETIONS)
