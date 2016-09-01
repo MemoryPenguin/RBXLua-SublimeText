@@ -15,17 +15,20 @@ class AutoCompleteProvider(sublime_plugin.EventListener):
 	"""
 	The automatic completions provider.
 	"""
-	def on_query_completions(self, view, prefix, locations):
+	def on_query_completions(self, view, prefix, points):
 		selected_completions = set()
 
-		for location in locations:
-			if "source.rbxlua" not in view.scope_name(location):
+		for point in points:
+			if "source.rbxlua" not in view.scope_name(point):
 				return
 
-			line = view.substr(view.line(location))
-			function_match = FUNCTION_CALL_REGEX.search(line)
+			row_col = view.rowcol(point)
+			line_region = view.line(point)
+			line_text = view.substr(line_region)
+			function_match = FUNCTION_CALL_REGEX.search(line_text, 0, row_col[1])
 
-			if function_match is not None:
+			if function_match is not None and function_match.end(0) >= row_col[1]:
+				print(function_match.end(0), row_col[1])
 				function_name = function_match.group(1)
 
 				if function_name in service_detections:
