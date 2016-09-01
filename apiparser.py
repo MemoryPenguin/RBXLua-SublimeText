@@ -1,9 +1,10 @@
 import re
 from urllib.request import urlopen
+from ROBLOXLua.extra_tags import apply_extra_tags
 
 API_URL = r"http://anaminus.github.io/rbx/raw/api/latest.txt"
 API_REGEX = re.compile(r"^\s*(\w+) (\w+)[ \.]?(\w*)[ \.:]*(\w*)(.*)")
-TAG_REGEX = re.compile(r"\[\w+\]")
+TAG_REGEX = re.compile(r"\[(\w)+\]")
 API_TAG_FILTERS = [ "hidden", "deprecated", "RobloxScriptSecurity", "RobloxScriptSecurity" ]
 
 def parse_dump_line(line):
@@ -20,6 +21,7 @@ def parse_dump_line(line):
 	entry["entry_tags"] = tags
 
 	if line_type == "Class":
+		entry["class_name"] = match.group(2)
 		entry["entry_completion"] = match.group(2)
 	elif line_type == "Property" or line_type == "Function" or line_type == "YieldFunction" or line_type == "Callback":
 		entry["entry_completion"] = match.group(4)
@@ -33,7 +35,7 @@ def parse_dump_line(line):
 		entry["enum_parent"] = match.group(2)
 		entry["entry_full_completion"] = "Enum.{0}.{1}".format(match.group(2), match.group(3))
 
-	return entry
+	return apply_extra_tags(entry)
 
 def parse_api_dump():
 	"""
