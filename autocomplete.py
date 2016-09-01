@@ -5,7 +5,7 @@ from ROBLOXLua.apiparser import parse_api_dump
 completion_items = parse_api_dump()
 
 FUNCTION_CALL_REGEX = re.compile(r"\b([\w\.]+)\s*\(?[\"\']")
-ENUM_REGEX = re.compile(r"\bEnum\.(\w*)(\.?\w*)")
+ENUM_REGEX = re.compile(r"\bEnum\.(\w*)([\.:]?\w*)")
 
 service_detections = [ "GetService", "FindService", "getService", "service" ]
 creatable_detections = [ "Instance.new" ]
@@ -41,7 +41,10 @@ class AutoCompleteProvider(sublime_plugin.EventListener):
 				if enum_match.group(2) is None or enum_match.group(2) == "":
 					selected_completions.update(enum_names)
 				else:
-					selected_completions.update(set([ e["entry_completion"] for e in completion_items if e["entry_type"] == "EnumItem" and e["enum_parent"] == enum_match.group(1) ]))
+					if enum_match.group(2)[0] == ".":
+						selected_completions.update(set([ e["entry_completion"] for e in completion_items if e["entry_type"] == "EnumItem" and e["enum_parent"] == enum_match.group(1) ]))
+					else:
+						selected_completions.add("GetEnumItems()")
 
 		if len(selected_completions) > 0:
 			return ([ [e] for e in selected_completions ], sublime.INHIBIT_EXPLICIT_COMPLETIONS | sublime.INHIBIT_WORD_COMPLETIONS)
