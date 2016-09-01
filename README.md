@@ -22,7 +22,7 @@ Currently this plugin is not on Package Control; keep an eye on [this PR](https:
 1. Download the repository's source from [the latest release](https://github.com/MemoryPenguin/RBXLua-SublimeText/releases/latest).
 2. Open Sublime Text.
 3. Open your packages folder using Preferences>Browse Packages in the menu.
-4. Create a new folder in your packages folder; name it something descriptive (I suggest `RbxLua`)
+4. Create a new folder in your packages folder named ROBLOXLua (it must be named ROBLOXLua or autocomplete will not work!)
 5. Extract the contents of the repository download into the folder you made.
 6. Restart Sublime Text 3.
 7. ???
