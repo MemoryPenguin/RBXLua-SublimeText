@@ -9,9 +9,7 @@ FUNCTION_CALL_REGEX = re.compile(r"\b([\w\.]+)\s*\(?[\"\']")
 service_detections = [ "GetService", "FindService", "getService", "service" ]
 creatable_detections = [ "Instance.new" ]
 services = set([ e["entry_completion"] for e in completion_items if e["entry_type"] == "Class" and "service" in e["entry_tags"] ])
-creatables = set([ e["entry_completion"] for e in completion_items if e["entry_type"] == "Class" and ("notCreatable" not in e["entry_tags"] and "abstract" not in e["entry_tags"] and "service" not in e["entry_tags"]) ])
-
-print(creatables)
+creatables = set([ e["entry_completion"] for e in completion_items if e["entry_type"] == "Class" and ("notCreatable" not in e["entry_tags"] and "abstract" not in e["entry_tags"] and "service" not in e["entry_tags"] and "deprecated" not in e["entry_tags"]) ])
 
 class AutoCompleteProvider(sublime_plugin.EventListener):
 	"""
