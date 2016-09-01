@@ -93,7 +93,8 @@ services = [
 	"OneQuarterClusterPacketCacheBase",
 	"ClusterPacketCache",
 	"PhysicsPacketCache",
-	"InstancePacketCache"
+	"InstancePacketCache",
+	"TaskScheduler"
 ]
 
 abstract = [
@@ -142,17 +143,68 @@ abstract = [
 	"ServiceProvider"
 ]
 
-notCreatable = [
-	"PyramidPart",
-	"PrismPart",
-	"Terrain",
+not_creatable = [
+	"UnionOperation",
+	"NegateOperation",
+	"AdvancedDragger",
+	"BinaryStringValue",
+	"CacheableContentProvider",
+	"MeshContentProvider",
+	"SolidModelContentProvider",
+	"TextureContentProvider",
+	"Controller",
+	"HumanoidController",
+	"VehicleController",
+	"SkateboardController",
+	"DebugSettings",
+	"Feature",
+	"DebuggerWatch",
+	"GameSettings",
+	"LuaSettings",
+	"NetworkSettings",
+	"PhysicsSettings",
+	"RenderSettings",
+	"GenericSettings",
+	"GlobalSettings",
+	"UserSettings",
+	"UserGameSettings",
+	"RunningAverageTimeDouble",
+	"RunningAverageItemDouble",
+	"RunningAverageItemInt",
+	"RunningAverageTimeInt",
+	"RunningAverageTimeIntervalItem",
+	"StarterCharacterScripts",
+	"StarterPlayerScripts",
+	"PlayerScripts",
+	"ProfilingItem",
+	"ReflectionMetadata",
+	"ReflectionMetadataCallbacks",
+	"ReflectionMetadataClasses",
+	"ReflectionMetadataEnums",
+	"ReflectionMetadataEvents",
+	"ReflectionMetadataFunctions",
+	"ReflectionMetadataClass",
+	"ReflectionMetadataItem",
+	"ReflectionMetadataEnum",
+	"ReflectionMetadataEnumItem",
+	"ReflectionMetadataMember",
+	"ReflectionMetadataProperties",
+	"ReflectionMetadataYieldFunctions",
+	"StandardPages",
+	"DataStorePages",
+	"FriendPages",
+	"PluginManager",
 	"Toolbar",
-	"Button"
+	"Button",
+	"Plugin",
+	"GlobalDataStore",
+	"OrderedDataStore",
+	"StatsItem"
 ]
 
 tag_definitions.append(TagDefinition("service", lambda entry: entry["entry_type"] == "Class" and entry["class_name"] in services))
 tag_definitions.append(TagDefinition("abstract", lambda entry: entry["entry_type"] == "Class" and entry["class_name"] in abstract))
-tag_definitions.append(TagDefinition("notCreatable", lambda entry: entry["entry_type"] == "Class" and entry["class_name"] in notCreatable and "notCreatable" not in entry["entry_tags"]))
+tag_definitions.append(TagDefinition("notCreatable", lambda entry: entry["entry_type"] == "Class" and entry["class_name"] in not_creatable and "notCreatable" not in entry["entry_tags"]))
 
 def apply_extra_tags(entry):
 	for tag_def in tag_definitions:
