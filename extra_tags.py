@@ -1,3 +1,17 @@
+class TagDefinition(object):
+	"""
+	A definition of an extra tag.
+	"""
+	def __init__(self, name, matcher):
+		super(TagDefinition, self).__init__()
+		self.tag_name = name
+		self.match_check = matcher
+
+	def tag_matches(self, tag):
+		return self.match_check(tag)
+
+tag_definitions = []
+
 services = [
 	"AdService",
 	"AssetService",
@@ -128,11 +142,21 @@ abstract = [
 	"ServiceProvider"
 ]
 
-def apply_extra_tags(entry):
-	if entry["entry_type"] == "Class" and entry["class_name"] in services:
-		entry["entry_tags"].append("service")
+notCreatable = [
+	"PyramidPart",
+	"PrismPart",
+	"Terrain",
+	"Toolbar",
+	"Button"
+]
 
-	if entry["entry_type"] == "Class" and entry["class_name"] in abstract:
-		entry["entry_tags"].append("abstract")
+tag_definitions.append(TagDefinition("service", lambda entry: entry["entry_type"] == "Class" and entry["class_name"] in services))
+tag_definitions.append(TagDefinition("abstract", lambda entry: entry["entry_type"] == "Class" and entry["class_name"] in abstract))
+tag_definitions.append(TagDefinition("notCreatable", lambda entry: entry["entry_type"] == "Class" and entry["class_name"] in notCreatable and "notCreatable" not in entry["entry_tags"]))
+
+def apply_extra_tags(entry):
+	for tag_def in tag_definitions:
+		if tag_def.tag_matches(entry):
+			entry["entry_tags"].append(tag_def.tag_name)
 
 	return entry
