@@ -7,6 +7,7 @@
 		"game",
 		"_VERSION",
 		"_G",
+		"Enum",
 		{ "trigger": "delay", "content": "delay($1, $2)" },
 		{ "trigger": "wait", "content": "wait($1)" },
 		{ "trigger": "spawn", "content": "spawn($1)" },
