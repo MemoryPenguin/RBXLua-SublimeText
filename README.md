@@ -17,7 +17,21 @@ Once installed, simply select the language using `Ctrl-Shift-P` and searching fo
 ```
 
 ## Installation
-Currently this plugin is not on Package Control; keep an eye on [this PR](https://github.com/wbond/package_control_channel/pull/5781) to find out when it is. In the meantime, to manually install it:
+
+### Package Control
+The easiest way to install the plugin is through [Package Control](https://packagecontrol.io/).
+
+1. Open Sublime Text.
+2. [Install Package Control](https://packagecontrol.io/installation) if it isn't already installed.
+3. Press `Ctrl-Shift-P` to open the command palette.
+4. Search for `Package Control - Install Package`.
+5. Search for `ROBLOXLua` in the list.
+6. Press enter with the `ROBLOXLua` entry selected.
+7. ???
+8. Profit
+
+### Manual
+In case you can't use Package Control, you can install the plugin manually. Note that you will have to manually update each time a new update is released.
 
 1. Download the repository's source from [the latest release](https://github.com/MemoryPenguin/RBXLua-SublimeText/releases/latest).
 2. Open Sublime Text.
