@@ -111,7 +111,7 @@ contexts:
       scope: punctuation.definition.string.end.rbxlua
       pop: true
     - match: '{{string_escape_characters}}'
-      scope: constant.character.escape
+      scope: constant.character.escape.rbxlua
 
   single_quoted_string:
     - meta_scope: string.quoted.single.rbxlua
@@ -121,7 +121,7 @@ contexts:
       scope: punctuation.definition.string.end.rbxlua
       pop: true
     - match: '{{string_escape_characters}}'
-      scope: constant.character.escape
+      scope: constant.character.escape.rbxlua
 
   multiline_string:
     - meta_scope: string.quoted.other.rbxlua
