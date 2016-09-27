@@ -63,7 +63,7 @@ contexts:
       scope: variable.language.rbxlua
 
     # Builtin functions
-    - match: '\b(print|warn|error|assert|collectgarbage|dofile|gcinfo|getfenv|getmetatable|ipairs|load|loadfile|loadstring|newproxy|next|pairs|pcall|rawequal|rawget|rawset|select|setfenv|setmetatable|tonumber|type|unpack|xpcall|[dD]elay|ElapsedTime|LoadLibrary|require|[sS]pawn|tick|time|UserSettings|Version|wait|ypcall|DebuggerManager|PluginManager|settings|stats|\bmath\.(?:abs|acos|asin|atan2?|ceil|cos|cosh|deg|exp|floor|fmod|frexp|ldexp|log|log10|max|min|modf|noise|pow|rad|random|randomseed|sin|sinh|sqrt|tan|tanh)|coroutine\.(?:create|resume|running|status|wrap|yield)|string\.(?:byte|char|dump|find|format|len|lower|match|rep|reverse|sub|upper|gmatch|gsub)|table\.(?:concat|insert|remove|sort))\b'
+    - match: '\b(print|warn|error|assert|collectgarbage|dofile|getfenv|getmetatable|ipairs|load|loadfile|spawn|loadstring|newproxy|next|pairs|[xy]?pcall|rawequal|rawget|rawset|select|setfenv|setmetatable|tonumber|type|unpack|delay|elapsedTime|LoadLibrary|require|spawn|tick|time|UserSettings|Version|wait|DebuggerManager|math\.(?:abs|acos|asin|atan2?|ceil|cos|cosh|deg|exp|floor|fmod|frexp|ldexp|log|log10|max|min|modf|noise|pow|rad|random|randomseed|sin|sinh|sqrt|tan|tanh)|coroutine\.(?:create|resume|running|status|wrap|yield)|string\.(?:byte|char|dump|find|format|len|lower|match|rep|reverse|sub|upper|gmatch|gsub)|table\.(?:concat|insert|remove|sort))\b'
       scope: variable.function.builtin.rbxlua
 
     # Deprecated table functions
@@ -102,6 +102,10 @@ contexts:
     - match: '\bfunction\b'
       scope: storage.type.function.rbxlua
       push: function_declaration
+
+    # Deprecated members
+    - match: '\b(Warn|Workspace|Game|Spawn|Delay|ElapsedTime|Wait|stats|PluginManager|gcinfo)\b'
+      scope: invalid.deprecated.rbxlua
 
   double_quoted_string:
     - meta_scope: string.quoted.double.rbxlua
