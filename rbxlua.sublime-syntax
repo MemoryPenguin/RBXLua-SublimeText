@@ -8,7 +8,7 @@ file_extensions:
 scope: source.rbxlua
 
 variables:
-  string_escape_characters: '\b%(a|A|c|C|d|D|l|L|p|P|s|S|u|U|w|W|x|X|z|Z)'
+  string_escape_characters: '%(a|A|c|C|d|D|l|L|p|P|s|S|u|U|w|W|x|X|z|Z|g|G|o|e|E|f|d|i|c|%|q)'
   identifier: '[A-Za-z]\w*'
   number: '(-)?\d*\.?\d+'
 
