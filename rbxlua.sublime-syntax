@@ -8,8 +8,8 @@ file_extensions:
 scope: source.rbxlua
 
 variables:
-  string_escape_characters: '\b%(a|A|c|C|d|D|l|L|p|P|s|S|u|U|w|W|x|X|z|Z)'
-  identifier: '[A-Za-z]\w*'
+  string_escape_characters: '%(a|A|c|C|d|D|l|L|p|P|s|S|u|U|w|W|x|X|z|Z|g|G|o|e|E|f|d|i|c|%|q)'
+  identifier: '[A-Za-z_]\w*'
   number: '(-)?\d*\.?\d+'
 
 contexts:
@@ -22,6 +22,10 @@ contexts:
     - match: "'"
       scope: punctuation.definition.string.begin.rbxlua
       push: single_quoted_string
+
+    - match: '\[\['
+      scope: punctuation.definition.string.begin.multiline.rbxlua
+      push: multiline_string
 
     # Comments
     - match: '--\[\['
@@ -47,7 +51,7 @@ contexts:
       scope: constant.language.rbxlua
 
     # Control keywords
-    - match: '\b(break|do|end|for|in|or|repeat|return|while)\b'
+    - match: '\b(break|do|end|for|in|repeat|return|while)\b'
       scope: keyword.control.rbxlua
 
     # Conditional keywords
@@ -59,7 +63,7 @@ contexts:
       scope: variable.language.rbxlua
 
     # Builtin functions
-    - match: '\b(print|warn|error|assert|collectgarbage|dofile|gcinfo|getfenv|getmetatable|ipairs|load|loadfile|loadstring|newproxy|next|pairs|pcall|rawequal|rawget|rawset|select|setfenv|setmetatable|tonumber|type|unpack|xpcall|[dD]elay|ElapsedTime|LoadLibrary|require|[sS]pawn|tick|time|UserSettings|Version|wait|ypcall|DebuggerManager|PluginManager|settings|stats|\bmath\.(?:abs|acos|asin|atan2?|ceil|cos|cosh|deg|exp|floor|fmod|frexp|ldexp|log|log10|max|min|modf|noise|pow|rad|random|randomseed|sin|sinh|sqrt|tan|tanh)|coroutine\.(?:create|resume|running|status|wrap|yield)|string\.(?:byte|char|dump|find|format|len|lower|match|rep|reverse|sub|upper|gmatch|gsub)|table\.(?:concat|insert|remove|sort))\b'
+    - match: '\b(print|warn|error|assert|collectgarbage|dofile|getfenv|getmetatable|ipairs|load|loadfile|spawn|loadstring|newproxy|next|pairs|[xy]?pcall|rawequal|rawget|rawset|select|setfenv|setmetatable|tonumber|type|unpack|delay|elapsedTime|LoadLibrary|require|spawn|tick|time|UserSettings|Version|wait|DebuggerManager|math\.(?:abs|acos|asin|atan2?|ceil|cos|cosh|deg|exp|floor|fmod|frexp|ldexp|log|log10|max|min|modf|noise|pow|rad|random|randomseed|sin|sinh|sqrt|tan|tanh)|coroutine\.(?:create|resume|running|status|wrap|yield)|string\.(?:byte|char|dump|find|format|len|lower|match|rep|reverse|sub|upper|gmatch|gsub)|table\.(?:concat|insert|remove|sort))\b'
       scope: variable.function.builtin.rbxlua
 
     # Deprecated table functions
@@ -99,6 +103,14 @@ contexts:
       scope: storage.type.function.rbxlua
       push: function_declaration
 
+    # Deprecated members
+    - match: '\b(Warn|Workspace|Game|Spawn|Delay|ElapsedTime|Wait|stats|PluginManager|gcinfo)\b'
+      scope: invalid.deprecated.rbxlua
+
+    # Enums
+    - match: '\bEnum\.?({{identifier}})?\.?({{identifier}})?\b'
+      scope: constant.language.enum.rbxlua
+
   double_quoted_string:
     - meta_scope: string.quoted.double.rbxlua
     - match: '\\.'
@@ -107,7 +119,7 @@ contexts:
       scope: punctuation.definition.string.end.rbxlua
       pop: true
     - match: '{{string_escape_characters}}'
-      scope: constant.character.escape
+      scope: constant.character.escape.rbxlua
 
   single_quoted_string:
     - meta_scope: string.quoted.single.rbxlua
@@ -117,7 +129,17 @@ contexts:
       scope: punctuation.definition.string.end.rbxlua
       pop: true
     - match: '{{string_escape_characters}}'
-      scope: constant.character.escape
+      scope: constant.character.escape.rbxlua
+
+  multiline_string:
+    - meta_scope: string.quoted.other.rbxlua
+    - match: '\\.'
+      scope: constant.character.escape.rbxlua
+    - match: '\]\]'
+      scope: punctuation.definition.string.end.multiline.rbxlua
+      pop: true
+    - match: '{{string_escape_characters}}'
+      scope: constant.character.escape.rbxlua
 
   line_comment:
     - meta_scope: comment.line.rbxlua
