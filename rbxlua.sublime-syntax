@@ -51,7 +51,7 @@ contexts:
       scope: constant.language.rbxlua
 
     # Control keywords
-    - match: '\b(break|do|end|for|in|or|repeat|return|while)\b'
+    - match: '\b(break|do|end|for|in|repeat|return|while)\b'
       scope: keyword.control.rbxlua
 
     # Conditional keywords
