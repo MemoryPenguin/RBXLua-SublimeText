@@ -107,6 +107,10 @@ contexts:
     - match: '\b(Warn|Workspace|Game|Spawn|Delay|ElapsedTime|Wait|stats|PluginManager|gcinfo)\b'
       scope: invalid.deprecated.rbxlua
 
+    # Enums
+    - match: '\bEnum\.?({{identifier}})?\.?({{identifier}})?\b'
+      scope: constant.language.enum.rbxlua
+
   double_quoted_string:
     - meta_scope: string.quoted.double.rbxlua
     - match: '\\.'
