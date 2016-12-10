@@ -1,5 +1,5 @@
 {
-	"scope": "source.rbxlua",
+	"scope": "source.rbxlua - string",
 	"completions": [
 		"workspace",
 		"script",
